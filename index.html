@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Integral de Gestión IA - ITIL & PMBOK</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+</head>
+<body>
+    <!-- Barra de Título -->
+    <div class="barra-titulo">
+        <div class="titulo-app">
+            <span class="icono-app">🤖</span>
+            <span>Sistema Integral de Gestión IA - ITIL & PMBOK</span>
+        </div>
+        <div class="controles-ventana">
+            <button class="btn-minimizar">_</button>
+            <button class="btn-maximizar">□</button>
+            <button class="btn-cerrar">×</button>
+        </div>
+    </div>
+
+    <!-- Barra de Menú -->
+    <div class="barra-menu">
+        <div class="menu-item">
+            <span>Archivo</span>
+            <div class="dropdown-menu">
+                <div class="menu-opcion" onclick="nuevoProyecto()">Nuevo Proyecto</div>
+                <div class="menu-opcion" onclick="exportarDatos()">Exportar Datos</div>
+                <div class="menu-opcion" onclick="generarReporte()">Generar Reporte</div>
+            </div>
+        </div>
+        <div class="menu-item">
+            <span>Proyecto</span>
+            <div class="dropdown-menu">
+                <div class="menu-opcion" onclick="abrirVentana('dashboard-ejecutivo')">Dashboard Ejecutivo</div>
+                <div class="menu-opcion" onclick="abrirVentana('gantt')">Diagrama de Gantt</div>
+                <div class="menu-opcion" onclick="abrirVentana('recursos')">Gestión de Recursos</div>
+            </div>
+        </div>
+        <div class="menu-item">
+            <span>ITIL</span>
+            <div class="dropdown-menu">
+                <div class="menu-opcion" onclick="abrirVentana('incidentes')">Gestión de Incidentes</div>
+                <div class="menu-opcion" onclick="abrirVentana('cambios')">Gestión de Cambios</div>
+                <div class="menu-opcion" onclick="abrirVentana('dashboard-itil')">Dashboard ITIL</div>
+            </div>
+        </div>
+        <div class="menu-item">
+            <span>Automatización</span>
+            <div class="dropdown-menu">
+                <div class="menu-opcion" onclick="abrirVentana('generador')">Centro de Automatización</div>
+                <div class="menu-opcion" onclick="generarProyectoAleatorio()">Generar Proyecto IA</div>
+                <div class="menu-opcion" onclick="generarIncidentesDelDia()">Simular Incidentes</div>
+                <div class="menu-opcion" onclick="actualizarMetricas()">Actualizar Métricas</div>
+            </div>
+        </div>
+        <div class="menu-item">
+            <span>Reportes</span>
+            <div class="dropdown-menu">
+                <div class="menu-opcion" onclick="abrirVentana('centro-graficos')">Centro de Gráficos</div>
+                <div class="menu-opcion" onclick="abrirVentana('comparador')">Comparador de Modelos</div>
+                <div class="menu-opcion" onclick="exportarReporte()">Exportar Reporte Semanal</div>
+            </div>
+        </div>
+        <div class="menu-item">
+            <span>Herramientas</span>
+            <div class="dropdown-menu">
+                <div class="menu-opcion" onclick="abrirVentana('calculadoras')">Calculadoras IA</div>
+                <div class="menu-opcion" onclick="toggleTema()">Cambiar Tema</div>
+                <div class="menu-opcion" onclick="abrirBusqueda()">Búsqueda Global (Ctrl+K)</div>
+            </div>
+        </div>
+        <div class="menu-item">
+            <span>Ayuda</span>
+            <div class="dropdown-menu">
+                <div class="menu-opcion" onclick="abrirVentana('tutorial')">Tutorial Interactivo</div>
+                <div class="menu-opcion" onclick="abrirVentana('glosario')">Glosario</div>
+                <div class="menu-opcion">Acerca de</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenedor Principal -->
+    <div class="contenedor-principal">
+        <!-- Panel Lateral -->
+        <div class="panel-lateral">
+            <div class="seccion-nav">
+                <h3>📊 Dashboards</h3>
+                <div class="nav-item" onclick="abrirVentana('dashboard-ejecutivo')">Dashboard Ejecutivo</div>
+                <div class="nav-item" onclick="abrirVentana('dashboard-tecnico')">Dashboard Técnico IA</div>
+                <div class="nav-item" onclick="abrirVentana('dashboard-itil')">Dashboard ITIL</div>
+                <div class="nav-item" onclick="abrirVentana('dashboard-financiero')">Dashboard Financiero</div>
+            </div>
+            <div class="seccion-nav">
+                <h3>🚀 Proyectos</h3>
+                <div class="nav-item" onclick="abrirVentana('lista-proyectos')">Lista de Proyectos</div>
+                <div class="nav-item" onclick="abrirVentana('gantt')">Diagrama de Gantt</div>
+                <div class="nav-item" onclick="abrirVentana('riesgos')">Gestión de Riesgos</div>
+            </div>
+            <div class="seccion-nav">
+                <h3>🎯 ITIL</h3>
+                <div class="nav-item" onclick="abrirVentana('incidentes')">Incidentes</div>
+                <div class="nav-item" onclick="abrirVentana('cambios')">Cambios</div>
+                <div class="nav-item" onclick="abrirVentana('sla')">SLA Monitor</div>
+            </div>
+            <div class="seccion-nav">
+                <h3>🤖 IA & Métricas</h3>
+                <div class="nav-item" onclick="abrirVentana('metricas-ia')">Métricas de Modelos</div>
+                <div class="nav-item" onclick="abrirVentana('comparador')">Comparador Modelos</div>
+                <div class="nav-item" onclick="abrirVentana('matriz-confusion')">Matriz de Confusión</div>
+            </div>
+            <div class="seccion-nav">
+                <h3>⚡ Automatización</h3>
+                <div class="nav-item destacado" onclick="abrirVentana('generador')">Centro de Automatización</div>
+                <div class="nav-item" onclick="abrirVentana('monitor-tiempo-real')">Monitor en Tiempo Real</div>
+            </div>
+        </div>
+
+        <!-- Área de Trabajo -->
+        <div class="area-trabajo" id="areaTrabajo">
+            <!-- Las ventanas se generarán dinámicamente aquí -->
+        </div>
+
+        <!-- Panel de Ayuda Contextual -->
+        <div class="panel-ayuda">
+            <h3>📖 Ayuda Contextual</h3>
+            <div id="contenidoAyuda">
+                <h4>Bienvenido al Sistema</h4>
+                <p>Este sistema integra metodologías ITIL y PMBOK para la gestión completa de proyectos de Inteligencia Artificial.</p>
+                <h4>💡 Inicio Rápido</h4>
+                <ul>
+                    <li>Usa el Centro de Automatización para generar datos</li>
+                    <li>Explora los dashboards para visualizar métricas</li>
+                    <li>Gestiona incidentes ITIL en tiempo real</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barra de Estado -->
+    <div class="barra-estado">
+        <div class="estado-item">
+            <span id="reloj"></span>
+        </div>
+        <div class="estado-item">
+            Proyectos Activos: <span id="contadorProyectos">3</span>
+        </div>
+        <div class="estado-item">
+            Incidentes Abiertos: <span id="contadorIncidentes">5</span>
+        </div>
+        <div class="estado-item">
+            CPU: <span id="cpuUsage">45%</span>
+        </div>
+        <div class="estado-item">
+            Memoria: <span id="memUsage">2.1 GB</span>
+        </div>
+    </div>
+
+    <!-- Contenedor de Notificaciones -->
+    <div id="contenedorNotificaciones"></div>
+
+    <!-- Plantillas de Ventanas -->
+    <template id="template-ventana">
+        <div class="ventana" data-ventana="">
+            <div class="ventana-header">
+                <div class="ventana-titulo"></div>
+                <div class="ventana-controles">
+                    <button class="ventana-btn" onclick="minimizarVentana(this)">_</button>
+                    <button class="ventana-btn" onclick="maximizarVentana(this)">□</button>
+                    <button class="ventana-btn" onclick="cerrarVentana(this)">×</button>
+                </div>
+            </div>
+            <div class="ventana-contenido"></div>
+        </div>
+    </template>
+
+    <script src="script.js"></script>
+</body>
+</html>
